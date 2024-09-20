@@ -11,25 +11,25 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Initialiser le client Arize
-arize_client = Client(
-    api_key=os.getenv('ARIZE_API_KEY'),
-    space_key=os.getenv('ARIZE_PROJECT_ID')
-)
+#arize_client = Client(
+#    api_key=os.getenv('ARIZE_API_KEY'),
+#    space_key=os.getenv('ARIZE_PROJECT_ID')
+#)
 
 # Définir le schéma des données pour Arize
-schema = Schema(
-    prediction_id_column_name="prediction_id",
-    timestamp_column_name="timestamp",
-    feature_column_names=[
-        "credit_lines_outstanding", 
-        "loan_amt_outstanding", 
-        "total_debt_outstanding", 
-        "income", 
-        "years_employed", 
-        "fico_score"
-    ],
-    prediction_label_column_name="prediction"
-)
+#schema = Schema(
+#    prediction_id_column_name="prediction_id",
+#    timestamp_column_name="timestamp",
+#    feature_column_names=[
+#        "credit_lines_outstanding", 
+#        "loan_amt_outstanding", 
+#        "total_debt_outstanding", 
+#        "income", 
+#        "years_employed", 
+#        "fico_score"
+#    ],
+#    prediction_label_column_name="prediction"
+#)
 
 # Initialiser l'application Flask et charger le modèle
 app = Flask(__name__)
@@ -56,15 +56,15 @@ def log_prediction(features, prediction):
     }])
 
     # Envoyer les données à Arize
-    arize_client.log(
-        dataframe=log_data,
-        schema=schema,
-        environment=Environments.PRODUCTION,  # Définir l'environnement à 'Production'
-        model_id="random_forest_model2",
-        model_type=ModelTypes.BINARY_CLASSIFICATION,
-        model_version="1.0",
-        validate=True
-    )
+#    arize_client.log(
+ #       dataframe=log_data,
+  #      schema=schema,
+   #     environment=Environments.PRODUCTION,  # Définir l'environnement à 'Production'
+    #    model_id="random_forest_model2",
+#        model_type=ModelTypes.BINARY_CLASSIFICATION,
+#        model_version="1.0",
+#        validate=True
+#    )
 
 # Page d'accueil
 @app.route("/", methods=["GET"])
