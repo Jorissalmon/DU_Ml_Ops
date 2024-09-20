@@ -3,7 +3,7 @@
 ## Project Overview
 
 This project is designed to showcase a Machine Learning pipeline using **Flask** for the web interface, **Docker** for containerization, and **AWS ECR** for hosting and deploying the Docker image. The model deployed is a **Random Forest** classifier, used to predict whether a client is at risk of defaulting on a loan based on various financial features. Additionally, we use **Arize** to monitor the model's performance in a production environment.
-
+ 
 ## Features
 
 - **Flask Web Application**: A simple web interface where users can input client information and receive predictions on loan default risk.
