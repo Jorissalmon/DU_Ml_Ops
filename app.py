@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import pickle
 import pandas as pd
-import os
 from dotenv import load_dotenv
 
 
@@ -20,20 +19,6 @@ def model_pred(features):
     test_data = pd.DataFrame([features])
     prediction = model.predict(test_data)
     return int(prediction[0])
-
-# Fonction pour enregistrer les prédictions avec Arize
-def log_prediction(features, prediction):
-    log_data = pd.DataFrame([{
-        "credit_lines_outstanding": features["credit_lines_outstanding"],
-        "loan_amt_outstanding": features["loan_amt_outstanding"],
-        "total_debt_outstanding": features["total_debt_outstanding"],
-        "income": features["income"],
-        "years_employed": features["years_employed"],
-        "fico_score": features["fico_score"],
-        "prediction": prediction,
-        "prediction_id": str(pd.util.hash_pandas_object(pd.Series(features)).values[0]),  # Générer un ID unique pour chaque prédiction
-        "timestamp": pd.Timestamp.now()
-    }])
 
 # Page d'accueil
 @app.route("/", methods=["GET"])
