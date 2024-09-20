@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request
 import pickle
 import pandas as pd
-from arize.pandas.logger import Client, Schema, Environments, ModelTypes
 import os
 from dotenv import load_dotenv
 
@@ -10,26 +9,7 @@ from dotenv import load_dotenv
 # Charger les variables d'environnement
 load_dotenv()
 
-# Initialiser le client Arize
-#arize_client = Client(
-#    api_key=os.getenv('ARIZE_API_KEY'),
-#    space_key=os.getenv('ARIZE_PROJECT_ID')
-#)
 
-# Définir le schéma des données pour Arize
-#schema = Schema(
-#    prediction_id_column_name="prediction_id",
-#    timestamp_column_name="timestamp",
-#    feature_column_names=[
-#        "credit_lines_outstanding", 
-#        "loan_amt_outstanding", 
-#        "total_debt_outstanding", 
-#        "income", 
-#        "years_employed", 
-#        "fico_score"
-#    ],
-#    prediction_label_column_name="prediction"
-#)
 
 # Initialiser l'application Flask et charger le modèle
 app = Flask(__name__)
@@ -54,17 +34,6 @@ def log_prediction(features, prediction):
         "prediction_id": str(pd.util.hash_pandas_object(pd.Series(features)).values[0]),  # Générer un ID unique pour chaque prédiction
         "timestamp": pd.Timestamp.now()
     }])
-
-    # Envoyer les données à Arize
-#    arize_client.log(
- #       dataframe=log_data,
-  #      schema=schema,
-   #     environment=Environments.PRODUCTION,  # Définir l'environnement à 'Production'
-    #    model_id="random_forest_model2",
-#        model_type=ModelTypes.BINARY_CLASSIFICATION,
-#        model_version="1.0",
-#        validate=True
-#    )
 
 # Page d'accueil
 @app.route("/", methods=["GET"])
